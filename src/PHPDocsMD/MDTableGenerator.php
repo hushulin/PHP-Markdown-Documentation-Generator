@@ -117,7 +117,7 @@ class MDTableGenerator implements TableGenerator
         if( $func->hasParams() ) {
             $params = [];
             foreach($func->getParams() as $param) {
-                $paramStr = '<em>'.$param->getType().'</em> **'.$param->getName();
+                $paramStr = '*'.$param->getType().'* **'.$param->getName();
                 if( $param->getDefault() ) {
                     $paramStr .= '='.$param->getDefault();
                 }
@@ -129,17 +129,17 @@ class MDTableGenerator implements TableGenerator
             $str .= ')';
         }
 
-        $str .= '** : <em>'.$func->getReturnType().'</em>';
+        $str .= '** : *'.$func->getReturnType().'*';
 
         if( $func->isDeprecated() ) {
-            $str = '<strike>'.$str.'</strike>';
-            $str .= '<br /><em>DEPRECATED - '.$func->getDeprecationMessage().'</em>';
+            $str = '~~'.$str.'~~';
+            $str .= '\r\n *DEPRECATED - '.$func->getDeprecationMessage().'*';
         } elseif( $func->getDescription() ) {
-            $str .= '<br /><em>'.$func->getDescription().'</em>';
+            $str .= '\r\n*'.$func->getDescription().'*';
         }
         if ($func->getSee() && $includeSee) {
-            $str .= '<br /><em>&nbsp;&nbsp;&nbsp;&nbsp;See: ' .
-                implode(', ', $func->getSee()) . '</em>';
+            $str .= '\r\n*&nbsp;&nbsp;&nbsp;&nbsp;See: ' .
+                implode(', ', $func->getSee()) . '*';
         }
 
         $str = str_replace(['****', '**** '], ['','**'], trim($str));
