@@ -107,7 +107,7 @@ class MDTableGenerator implements TableGenerator
     {
         $this->fullClassName = $func->getClass();
 
-        $str = '<strong>';
+        $str = '**';
 
         if( $this->declareAbstraction && $func->isAbstract() )
             $str .= 'abstract ';
@@ -117,19 +117,19 @@ class MDTableGenerator implements TableGenerator
         if( $func->hasParams() ) {
             $params = [];
             foreach($func->getParams() as $param) {
-                $paramStr = '<em>'.$param->getType().'</em> <strong>'.$param->getName();
+                $paramStr = '<em>'.$param->getType().'</em> **'.$param->getName();
                 if( $param->getDefault() ) {
                     $paramStr .= '='.$param->getDefault();
                 }
-                $paramStr .= '</strong>';
+                $paramStr .= '**';
                 $params[] = $paramStr;
             }
-            $str .= '</strong>'.implode(', ', $params) .')';
+            $str .= '**'.implode(', ', $params) .')';
         } else {
             $str .= ')';
         }
 
-        $str .= '</strong> : <em>'.$func->getReturnType().'</em>';
+        $str .= '** : <em>'.$func->getReturnType().'</em>';
 
         if( $func->isDeprecated() ) {
             $str = '<strike>'.$str.'</strike>';
@@ -142,7 +142,7 @@ class MDTableGenerator implements TableGenerator
                 implode(', ', $func->getSee()) . '</em>';
         }
 
-        $str = str_replace(['</strong><strong>', '</strong></strong> '], ['','</strong>'], trim($str));
+        $str = str_replace(['****', '**** '], ['','**'], trim($str));
 
         if( $func->getExample() )
             $this->examples[$func->getName()] = $func->getExample();
