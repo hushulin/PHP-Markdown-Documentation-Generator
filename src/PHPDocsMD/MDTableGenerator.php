@@ -117,28 +117,28 @@ class MDTableGenerator implements TableGenerator
         if( $func->hasParams() ) {
             $params = [];
             foreach($func->getParams() as $param) {
-                $paramStr = '*'.$param->getType().'* **'.$param->getName();
+                $paramStr = ' *'.$param->getType().'* **'.$param->getName();
                 if( $param->getDefault() ) {
                     $paramStr .= '='.$param->getDefault();
                 }
-                $paramStr .= '**';
+                $paramStr .= '** ';
                 $params[] = $paramStr;
             }
-            $str .= '**'.implode(', ', $params) .')';
+            $str .= '**'.implode(', ', $params) .' **)';
         } else {
             $str .= ')';
         }
 
-        $str .= '** : *'.$func->getReturnType().'*';
+        $str .= ' ** : *'.$func->getReturnType().'*';
 
         if( $func->isDeprecated() ) {
             $str = '~~'.$str.'~~';
-            $str .= '\r\n *DEPRECATED - '.$func->getDeprecationMessage().'*';
+            $str .= ' &#x270d;  *DEPRECATED - '.$func->getDeprecationMessage().'*';
         } elseif( $func->getDescription() ) {
-            $str .= '\r\n*'.$func->getDescription().'*';
+            $str .= ' &#x270d; *'.$func->getDescription().'*';
         }
         if ($func->getSee() && $includeSee) {
-            $str .= '\r\n*&nbsp;&nbsp;&nbsp;&nbsp;See: ' .
+            $str .= ' &#x270d; *&nbsp;&nbsp;&nbsp;&nbsp;See: ' .
                 implode(', ', $func->getSee()) . '*';
         }
 
