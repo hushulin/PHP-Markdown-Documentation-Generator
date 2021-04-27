@@ -82,7 +82,7 @@ class MDTableGenerator implements TableGenerator
         $this->examples = [];
         $this->markdown = ''; // Clear table
         $this->declareAbstraction = true;
-        $this->add('| Visibility | Function |');
+        $this->add('| Visibility <div style="width:150px"> | Function |');
         $this->add('|:-----------|:---------|');
     }
 
